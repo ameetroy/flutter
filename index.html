@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Flutter - Payment Getway</title>
+</head>
+<body>
+<div> 
+<p>Card number: 5531 8866 5214 2950 </p><br>
+<p>cvv: 564 </p><br>
+<p>Expiry: 09/32</p><br>
+<p>Pin: 3310</p><br>
+<p>OTP: 12345</p><br>
+</div>
+
+<form>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
+  <button type="button" onClick="makePayment()">Pay Now</button>
+</form>
+
+<script>
+  function makePayment() {
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X", // Your flutter pulick key
+      tx_ref: "RX1",
+      amount: 10,
+      currency: "USD",
+      country: "US",
+      payment_options: " ",
+      redirect_url: "http://localhost/flutter/callback.php", // specified redirect URL
+      meta: {
+        consumer_id: 23,
+        consumer_mac: "92a3-912ba-1192a",
+      },
+      customer: {
+        email: "cornelius@gmail.com",
+        phone_number: "08102909304",
+        name: "Flutterwave Developers",
+      },
+      callback: function (data) {
+        console.log(data);
+      },
+      onclose: function() {
+        // close modal
+      },
+      customizations: {
+        title: "My store",
+        description: "Payment for items in cart",
+        logo: "http://localhost/flutter/my_store_logo.webp",
+      },
+    });
+  }
+</script>
+</body>
+</html>
